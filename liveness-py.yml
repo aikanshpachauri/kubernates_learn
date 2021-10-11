@@ -1,11 +1,9 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
-  name: py-flask-controller
-  labels:
-    app: py-flask
+  name: py-deployment
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: py-flask
@@ -15,7 +13,7 @@ spec:
         app: py-flask
     spec:
       containers:
-      - name:  python-docker-flask
+      - name: python-docker-flask
         image: aikanshp/python-docker-repo
         ports:
         - name: flask-port
@@ -23,12 +21,13 @@ spec:
         livenessProbe: 
           httpGet:
             path: /
-            port: nodejs-port
+            port: flask-port
           initialDelaySeconds: 15
           timeoutSeconds: 30
         readinessProbe:
           httpGet:
             path: /
-            port: nodejs-port
+            port: flask-port
           initialDelaySeconds: 15
           timeoutSeconds: 30
+

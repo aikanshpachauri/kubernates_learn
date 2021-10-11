@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: py-deployment
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: py-flask
+  template:
+    metadata:
+      labels:
+        app: py-flask
+    spec:
+      containers:
+      - name: python-docker-flask
+        image: aikanshp/python-docker-repo
+        ports:
+        - name: flask-port
+          containerPort: 5000
+        
