@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pod-for-python-flask
+  labels:
+    app: test-flask-python
+spec:
+  containers:
+  - name: python-docker-flask
+    image: aikanshp/python-docker-repo
+    ports:
+    - name: flask-port
+      containerPort: 5000
+ 
